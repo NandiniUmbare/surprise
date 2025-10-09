@@ -8,7 +8,7 @@ import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { Howl } from "howler";
 
 export default function App() {
-  const [showConfetti, setShowConfetti] = useState(true);
+  const [showConfetti] = useState(true);
   const [showMemoryLane, setShowMemoryLane] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
