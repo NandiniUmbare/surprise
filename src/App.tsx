@@ -1,19 +1,54 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { motion } from "framer-motion";
 import mobileImage from './assets/mobile-main.jpg';
 import MemoryLane from "./components/MemoryLane";
+import music from "./assets/background-music.mp3";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { Howl } from "howler";
 
 export default function App() {
   const [showConfetti, setShowConfetti] = useState(true);
   const [showMemoryLane, setShowMemoryLane] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   const clickHandler = () => {
     setShowMemoryLane(true);
   }
+
+  const soundRef = useRef<Howl | null>(null);
+
+  const toggleMute = () => {
+		if (soundRef.current) {
+			const newMuteState = !isMuted;
+			soundRef.current.mute(newMuteState);
+			setIsMuted(newMuteState);
+		}
+  };
+  
+	useEffect(() => {
+		const sound = new Howl({
+			src: music,
+			loop: true,
+			volume: 0.5
+		});
+
+		soundRef.current = sound;
+		sound.play();
+		return () => {
+			sound.stop();
+		};
+	}, []);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-white">
       {showConfetti && <Confetti recycle={true} numberOfPieces={300} />}
+      {/* Mute button */}
+            <button
+              onClick={toggleMute}
+              className="absolute top-4 right-4 text-white text-2xl z-10"
+            >
+              {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
       {showMemoryLane ? <MemoryLane /> : 
         <>
       <motion.h1

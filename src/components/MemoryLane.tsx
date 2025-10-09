@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import {useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Howl } from "howler";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import Lightbox from "./Lightbox";
 import memories from "./data/memories.json";
 import WavyLine from "./WavyLine";
@@ -11,23 +9,7 @@ interface Memory {
 	text: string;
 }
 export default function MemoryLane() {
-	const [isMuted, setIsMuted] = useState(false);
 	const [selectedImage, setSelectedImage] = useState<Memory | null>(null);
-	const soundRef = useRef<Howl | null>(null);
-
-	useEffect(() => {
-		const sound = new Howl({
-			src: ["src/assets/background-music.mp3"],
-			loop: true,
-			volume: 0.5
-		});
-
-		soundRef.current = sound;
-		sound.play();
-		return () => {
-			sound.stop();
-		};
-	}, []);
 
 	const openLightbox = (memory: Memory) => {
 		setSelectedImage(memory);
@@ -36,23 +18,8 @@ export default function MemoryLane() {
 	const closeLightbox = () => {
 		setSelectedImage(null);
 	};
-
-	const toggleMute = () => {
-		if (soundRef.current) {
-			const newMuteState = !isMuted;
-			soundRef.current.mute(newMuteState);
-			setIsMuted(newMuteState);
-		}
-	};
 	return (
 		<div className="min-w-screen min-h-screen bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 py-16 px-6">
-			{/* Mute button */}
-			<button
-				onClick={toggleMute}
-				className="absolute top-4 right-4 text-white text-2xl z-10"
-			>
-				{isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-			</button>
 			{/* Heading */}
 			<motion.h2
 				initial={{ opacity: 0, y: -20 }}
