@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { motion } from "framer-motion";
-import mobileImage from './assets/mobile-main.jpg';
+import mobileImage from '../public/assets/mobile-main.jpg';
 import MemoryLane from "./components/MemoryLane";
-import music from "./assets/background-music.mp3";
+import music from "../public/assets/background-music.mp3";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { Howl } from "howler";
 

@@ -52,7 +52,7 @@ export default function MemoryLane() {
 			</div>
 
 			{/* Memory Cards */}
-			<div className="flex flex-col md:flex-row gap-8 px-4 relative overflow-x-auto overflow-y-hidden scroll-smooth hide-scroll mx-auto max-w-screen-lg">
+			<div className="flex flex-col md:flex-row items-center gap-8 px-4 relative overflow-x-auto overflow-y-hidden scroll-smooth hide-scroll mx-auto max-w-screen-lg">
                 {memories.map((memory, index) =>
 				<div key={index} className="relative h-full flex items-center flex-shrink-0">
 					<motion.div
