@@ -16,17 +16,14 @@ export default function MemoryLane() {
 	const soundRef = useRef<Howl | null>(null);
 
 	useEffect(() => {
-		// Initialize and play the background music
 		const sound = new Howl({
-			src: ["/background-music.mp3"], // Ensure the path is correct
+			src: ["src/assets/background-music.mp3"],
 			loop: true,
 			volume: 0.5
 		});
 
 		soundRef.current = sound;
 		sound.play();
-
-		// Cleanup on component unmount
 		return () => {
 			sound.stop();
 		};
